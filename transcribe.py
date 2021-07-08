@@ -25,6 +25,8 @@ import pyaudio
 import websocket
 from websocket._abnf import ABNF
 
+import wave
+
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
 # Even if your default input is multi channel (like a webcam mic),
@@ -39,6 +41,7 @@ RATE = 44100
 RECORD_SECONDS = 5
 FINALS = []
 LAST = None
+WAVE_OUTPUT_FILENAME = "output.mp3"
 
 REGION_MAP = {
     'us-east': 'gateway-wdc.watsonplatform.net',
@@ -75,6 +78,7 @@ def read_audio(ws, timeout):
 
     print("* recording")
     rec = timeout or RECORD_SECONDS
+    frames = []
 
     for i in range(0, int(RATE / CHUNK * rec)):
         data = stream.read(CHUNK)
@@ -83,6 +87,7 @@ def read_audio(ws, timeout):
         # need to indicate that otherwise the stream service
         # interprets this as text control messages.
         ws.send(data, ABNF.OPCODE_BINARY)
+        frames.append(data)
 
     # Disconnect the audio stream
     stream.stop_stream()
@@ -99,6 +104,14 @@ def read_audio(ws, timeout):
 
     # ... and kill the audio device
     p.terminate()
+
+    # Save the file
+    wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+    wf.setnchannels(CHANNELS)
+    wf.setsampwidth(p.get_sample_size(FORMAT))
+    wf.setframerate(RATE)
+    wf.writeframes(b''.join(frames))
+    wf.close()
 
 
 def on_message(self, msg):

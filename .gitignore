@@ -2,3 +2,5 @@
 .venv
 .vscode/
 speech.cfg
+*.wav
+*.mp3
