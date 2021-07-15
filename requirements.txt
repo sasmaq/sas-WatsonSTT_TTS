@@ -1,3 +1,5 @@
+ibm_watson
+playsound
 pyaudio
 websocket-client
 wave

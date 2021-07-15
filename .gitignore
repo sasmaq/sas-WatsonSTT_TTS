@@ -1,6 +1,6 @@
 .venv/
 .venv
 .vscode/
-speech.cfg
+*.cfg
 *.wav
 *.mp3
