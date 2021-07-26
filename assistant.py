@@ -7,7 +7,7 @@
 # See the README for documentation.
 #
 
-import json, argparse, importlib
+import json, argparse, importlib, peruse
 from os.path import join, dirname
 from ibm_watson import AssistantV2
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
@@ -80,10 +80,13 @@ def converse(assistantID, outputOnly=None, contextFile=None):
         for responses in resp['output']['generic']:
             if "text" in responses:
                 print(json.dumps(responses["text"], indent=2)[1:-1])
+                peruse.textTospech(json.dumps(responses["text"], indent=2)[1:-1])
             if "title" in responses:
                 print(json.dumps(responses["title"], indent=2)[1:-1])
+                peruse.textTospech(json.dumps(responses["title"], indent=2)[1:-1])
                 for options in responses["options"]:
                     print(json.dumps(options["label"], indent=2)[1:-1])
+                    peruse.textTospech(json.dumps(responses["label"], indent=2)[1:-1])
     else:
         print ("")
         print ("Full response object:")
@@ -169,6 +172,7 @@ def converse(assistantID, outputOnly=None, contextFile=None):
             for responses in respOutput['generic']:
                 if "text" in responses:
                     print(json.dumps(responses["text"], indent=2)[1:-1])
+                    peruse.textTospech(json.dumps(responses["text"], indent=2)[1:-1])
         else:
             print ("")
             print ("Full response object:")

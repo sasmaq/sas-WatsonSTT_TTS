@@ -15,10 +15,9 @@ authenticator = IAMAuthenticator(apikey)
 tts = TextToSpeechV1(authenticator=authenticator)
 tts.set_service_url(url)
 
+def textTospech(respone): 
+    with open('./speech.mp3', 'wb') as audio_file:
+        res = tts.synthesize(respone, accept='audio/mp3', voice='en-US_AllisonV3Voice').get_result() 
+        audio_file.write(res.content)
 
-with open('./speech.mp3', 'wb') as audio_file:
-    res = tts.synthesize('Hello World!', accept='audio/mp3', voice='en-US_AllisonV3Voice').get_result() 
-    audio_file.write(res.content)
-
-playsound('./speech.mp3', True)
-print("done")
+    playsound('./speech.mp3', True)

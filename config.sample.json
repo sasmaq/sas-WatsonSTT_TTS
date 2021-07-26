@@ -1,9 +1,0 @@
-{
-    "credentials": {
-        "version": "2017-05-26",
-        "versionV2": "2018-11-08",
-        "apikey": "Your API key",
-        "url": "https://gateway-fra.assistant.watson.cloud.ibm.com/instances/api"
-    },
-    "id": "Your Assistant ID"
-}
