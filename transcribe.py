@@ -130,6 +130,7 @@ def on_message(self, msg):
         if data["results"][0]["final"]:
             FINALS.append(data)
             LAST = None
+            watson_assistant(data['results'][0]['alternatives'][0]['transcript'])
         else:
             LAST = data
         # This prints out the current fragment that we are working on
@@ -203,6 +204,11 @@ def parse_args():
     args = parser.parse_args()
     return args
 
+def watson_assistant(text):
+    
+    file2write = open("speech.txt", 'w')
+    file2write.write(text)
+    file2write.close()
 
 def main():
     # Connect to websocket interfaces
@@ -229,6 +235,7 @@ def main():
     # call, so it won't return until the ws.close() gets called (after
     # 6 seconds in the dedicated thread).
     ws.run_forever()
+    
 
 
 if __name__ == "__main__":

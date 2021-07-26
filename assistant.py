@@ -7,7 +7,7 @@
 # See the README for documentation.
 #
 
-import json, argparse, importlib, peruse
+import json, argparse, importlib, peruse, subprocess
 from os.path import join, dirname
 from ibm_watson import AssistantV2
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
@@ -97,7 +97,12 @@ def converse(assistantID, outputOnly=None, contextFile=None):
     # Now loop to chat
     while True:
         # get some input
-        minput = input("\nPlease enter your input message:\n")
+
+        subprocess.call(["python", "transcribe.py", "-t", "5"])
+        file2read = open("speech.txt", 'r')
+        text = file2read.readline()
+        file2read.close()
+        minput = text
         # if we catch a "bye" then exit after deleting the session
         if (minput == "bye"):
             response = assistantService.delete_session(
