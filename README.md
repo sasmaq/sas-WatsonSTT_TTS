@@ -9,6 +9,7 @@ pip install -r requirements.txt
 you can provide your own API keys
 
 
+demo:
 
 ![alt text](https://github.com/sasmaq/sas-WatsonSTT_TTS/blob/main/demo.gif)
 
