@@ -186,7 +186,7 @@ def get_url():
     region = config.get('auth', 'region')
     host = REGION_MAP[region]
     return ("wss://{}/speech-to-text/api/v1/recognize"
-           "?model=en-US_BroadbandModel").format(host)
+           "?model=en-US_ShortForm_NarrowbandModel").format(host)
 
 def get_auth():
     config = configparser.RawConfigParser()

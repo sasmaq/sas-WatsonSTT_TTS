@@ -86,7 +86,7 @@ def converse(assistantID, outputOnly=None, contextFile=None):
                 peruse.textTospech(json.dumps(responses["title"], indent=2)[1:-1])
                 for options in responses["options"]:
                     print(json.dumps(options["label"], indent=2)[1:-1])
-                    peruse.textTospech(json.dumps(responses["label"], indent=2)[1:-1])
+                    peruse.textTospech(json.dumps(options["label"], indent=2)[1:-1])
     else:
         print ("")
         print ("Full response object:")
